@@ -1,0 +1,6 @@
+<tr>
+  <td data-link="<%= question_path(question) %>"><%= question.answers.count %></td>
+  <td data-link="<%= question_path(question) %>"><%= question.title %></td>
+  <td data-link="<%= question_path(question) %>"><%= question.text %></td>
+  <td>asked <%= time_ago_in_words question.created_at %> ago by <%= link_to question.user.username, user_path(question.user_id)%></td>
+</tr>

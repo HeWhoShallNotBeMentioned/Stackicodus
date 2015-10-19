@@ -1,0 +1,27 @@
+<h1>All Users</h1>
+
+total users: <%= @users.count %>
+total admin: <%= @users.admin.count %>
+
+<div class="container">
+<table class="table table-hover table-responsive">
+  <thead>
+    <tr>
+      <th><%= sortable "username" %></th>
+      <th><%= sortable "email" %></th>
+      <th><%= sortable "created_at", "Member Since" %></th>
+      <th><%= sortable "admin" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr data-link="<%= user_path(user) %>">
+        <td><%= user.username %></td>
+        <td><%= user.email %></td>
+        <td><%= user.created_at.strftime("%b %d") %></td>
+        <td><%= user.admin%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

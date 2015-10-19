@@ -1,0 +1,13 @@
+<div class="container">
+  <table class="table table-hover table-responsive">
+    <tbody>
+      <% @questions.each do |question| %>
+        <%= render 'question', :question => question %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<% if @questions.count == 0 %>
+  <p> There are currently no questions. It appears everyone is a genius. Congratulations!</p>
+<% end %>
