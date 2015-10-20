@@ -29,7 +29,7 @@
         <ul class="nav navbar-nav navbar-right">
           <% if @current_user %>
             <li>
-              <a data-toggle="modal" id="askQuestion" data-target="#myModal">Ask a Question</a>
+              <a href="#" data-toggle="modal" id="askQuestion" data-target="#myModal">Ask a Question</a>
             </li>
             <li>
               <%= link_to '<span class="glyphicon glyphicon-log-out"></span> Log Out'.html_safe, log_out_path %>

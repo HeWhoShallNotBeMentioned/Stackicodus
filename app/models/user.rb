@@ -31,6 +31,6 @@ class User < ActiveRecord::Base
   end
 
   def send_welcome_message
-    WelcomeMessage.welcome_email(self)
+    WelcomeMessage.welcome_email(self).deliver_now
   end
 end
