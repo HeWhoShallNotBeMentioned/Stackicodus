@@ -12,3 +12,9 @@
 <% if @questions.count == 0 %>
   <p> There are currently no questions. It appears everyone is a genius. Congratulations!</p>
 <% end %>
+
+
+<% if @current_user && @current_user.admin %>
+  <p>Total Questions Today: <%= @questions.daily.count %></p>
+  <p>Total Answers Today: <%= @answers.daily.count %></p>
+<% end %>

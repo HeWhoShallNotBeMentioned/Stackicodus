@@ -6,5 +6,6 @@ class Question < ActiveRecord::Base
   belongs_to :user
   has_many :answers
 
+  scope :daily, -> { where(created_at: Time.current.all_day) }
 
 end

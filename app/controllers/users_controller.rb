@@ -25,6 +25,30 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @question = Question.new
+    @questions = @user.questions
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if params[:admin]
+      if @user.update(admin: true)
+        redirect_to @user
+      else
+        flash[:alert] = "There was a problem making this user an admin."
+        redirect_to @user
+      end
+    end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    @questions = @user.questions
+    @questions.each do |question|
+      question.destroy
+    end
+    @user.destroy
+    flash[:alert] = "The user account has been deleted."
+    redirect_to  users_path
   end
 
 
@@ -38,6 +62,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :username, :password_confirmation)
+    params.require(:user).permit(:email, :password, :username, :password_confirmation, :admin)
   end
 end

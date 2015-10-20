@@ -1,1 +1,22 @@
-<h1><%= @user.username %></h1>
+<div class="row">
+  <div class="col-xs-3">
+    <img src="<%= @user.avatar %>" id="user-avatar">
+  </div>
+  <div class="col-xs-9">
+    <h1><%= @user.username %></h1>
+    <h5>Is user an administrator? <%= @user.admin %></h5>
+    <br>
+    <% if current_user && current_user.admin %>
+     <%= link_to "Delete User", user_path(@user), :data => {:confirm => "Are you sure?", :method => "delete"} %>
+     <br>
+     <%= link_to "Make User Admin", user_path(@user, :admin => true), :data => {:method => "patch"} %>
+    <% end %>
+
+  </div>
+</div>
+<h3>Questions Asked</h3>
+<br>
+<% @user.questions.each  do |question| %>
+  <%= question.title %> <br>
+  <%= question.text %>
+<% end %>

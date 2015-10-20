@@ -7,4 +7,5 @@ class Answer < ActiveRecord::Base
 
   has_many :comments
 
+  scope :daily, -> { where(created_at: Time.current.all_day) }
 end
