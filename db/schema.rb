@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019173748) do
+ActiveRecord::Schema.define(version: 20151020200054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,13 @@ ActiveRecord::Schema.define(version: 20151019173748) do
     t.boolean  "admin",             default: false
     t.string   "avatar",            default: "http://image.shutterstock.com/display_pic_with_logo/882263/172285076/stock-photo-avatar-mafia-skull-gangster-172285076.jpg"
     t.integer  "reputation_points"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
