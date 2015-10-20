@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Stackicodus</title>
+  <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -10,27 +11,36 @@
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <%= link_to 'Stackicodus', questions_path, :class => 'navbar-brand' %>
+        <%= link_to image_tag("logo.png"), questions_path, :class => 'navbar-brand' %>
       </div>
       <div>
         <ul class="nav navbar-nav">
+          <% if @current_user %>
+            <li>
+              <%= link_to @current_user.username.titleize, user_path(@current_user) %>
+            </li>
+            <% if @current_user.admin %>
+              <li>
+                <%= link_to 'All Users', users_path %>
+              </li>
+            <% end %>
+          <% end %>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <% if @current_user %>
-          <li class="navbar-brand">Logged in as - <%= @current_user.username %></li>
-          <li>
-            <a data-toggle="modal" data-target="#myModal">Ask a Question</a>
-          </li>
-          <li>
-            <%= link_to '<span class="glyphicon glyphicon-log-out"></span> Log Out'.html_safe, log_out_path %>
-          </li>
+            <li>
+              <a data-toggle="modal" data-target="#myModal">Ask a Question</a>
+            </li>
+            <li>
+              <%= link_to '<span class="glyphicon glyphicon-log-out"></span> Log Out'.html_safe, log_out_path %>
+            </li>
           <% else %>
-          <li>
-            <%= link_to '<span class="glyphicon glyphicon-log-in"></span> Log In'.html_safe, log_in_path %>
-          </li>
-          <li>
-            <%= link_to '<span class="glyphicon glyphicon-user"></span> Sign Up'.html_safe, new_user_path %>
-          </li>
+            <li>
+              <%= link_to '<span class="glyphicon glyphicon-log-in"></span> Log In'.html_safe, log_in_path %>
+            </li>
+            <li>
+              <%= link_to '<span class="glyphicon glyphicon-user"></span> Sign Up'.html_safe, new_user_path %>
+            </li>
           <% end %>
         </ul>
       </div>
@@ -66,13 +76,20 @@
     </div>
   </div>
   <% end %>
-
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <div class="container">
+    <% if flash[:notice] -%>
+      <div class = "alert alert-success"><%= flash[:notice] %></div>
+    <% end %>
+    <% if flash[:alert] -%>
+      <div class = "alert alert-success"><%= flash[:alert] %></div>
+    <% end %>
+  </div>
 
   <div class="container">
     <%= yield %>
   </div>
 
+  <!-- <div class="footer">
+  </div> -->
 </body>
 </html>

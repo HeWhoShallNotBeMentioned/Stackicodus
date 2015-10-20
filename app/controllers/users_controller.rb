@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @users = User.order(params[:sort] + " " + params[:direction])
+    @users = User.order(sort_column + ' ' + sort_direction)
+    @question = Question.new
   end
 
   def new
@@ -26,6 +27,8 @@ class UsersController < ApplicationController
     @question = Question.new
   end
 
+
+  private
   def sort_direction
     %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
   end
@@ -33,8 +36,6 @@ class UsersController < ApplicationController
   def sort_column
     User.column_names.include?(params[:sort]) ? params[:sort] : "username"
   end
-
-  private
 
   def user_params
     params.require(:user).permit(:email, :password, :username, :password_confirmation)

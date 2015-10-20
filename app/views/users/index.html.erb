@@ -3,7 +3,6 @@
 total users: <%= @users.count %>
 total admin: <%= @users.admin.count %>
 
-<div class="container">
 <table class="table table-hover table-responsive">
   <thead>
     <tr>
@@ -15,7 +14,7 @@ total admin: <%= @users.admin.count %>
   </thead>
   <tbody>
     <% @users.each do |user| %>
-      <tr data-link="<%= user_path(user) %>">
+      <tr onclick="location.href='<%= user_path(user) %>'">
         <td><%= user.username %></td>
         <td><%= user.email %></td>
         <td><%= user.created_at.strftime("%b %d") %></td>
@@ -24,4 +23,3 @@ total admin: <%= @users.admin.count %>
     <% end %>
   </tbody>
 </table>
-</div>
